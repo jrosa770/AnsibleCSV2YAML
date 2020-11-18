@@ -1,0 +1,40 @@
+# Build ID: {{ reference }}
+
+New Device Vars:
+# '{{ csvfile.0.Tier }}{{ csvfile.0.AppId }}_LS_{{ csvfile.0.Subnet }}-AP':
+  - name: '{{ csvfile.0.Tier }}{{ csvfile.0.AppId }}_LS_{{ csvfile.0.Subnet }}-AP'
+    tenant: '{{ csvfile.0.Tenant }}'
+    state: query
+
+{% for item in csvfile.split("\n") %}
+{%   if loop.index != 1 %}
+{%     set list = item.split(",") %}
+
+# '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD':
+  - name: '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD'
+    bd_type: ethernet
+    enable_routing: yes
+    enable_multicast: no
+    tenant: '{{ list[0]|trim() }}'
+    vrf: '{{ list[1]|trim() }}'
+    state: query
+
+# '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD_SUBNET':
+  - name: '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD_SUBNET'
+    tenant: '{{ list[0]|trim() }}'
+    ap: '{{ list[3]|trim() }}{{ list[2]|trim() }}_LS_{{ list[4]|trim() }}-AP'
+    bd: '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD'
+    subnet_name: '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD_SUBNET'
+    gateway: '{{ list[5]|trim() }}'
+    mask: {{ list[6]|trim() }}
+    state: query
+
+# '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-EPG':
+  - name: '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-EPG'
+    tenant: '{{ list[0]|trim() }}'
+    ap: '{{ list[3]|trim() }}{{ list[2]|trim() }}_LS_{{ list[4]|trim() }}-AP'
+    bd: '{{ list[3]|trim() }}{{ list[2]|trim() }}_{{ list[3]|trim() }}_{{ list[4]|trim() }}_{{ list[6]|trim() }}-BD'
+    state: query
+
+{%   endif %}
+{% endfor %}

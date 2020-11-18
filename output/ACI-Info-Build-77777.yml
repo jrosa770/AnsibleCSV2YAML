@@ -1,0 +1,89 @@
+# Build ID: 77777
+
+New Device Vars:
+
+# 'APP1618_LS_10.173.224.0-AP':
+  - name: 'APP1618_LS_10.173.224.0-AP'
+    tenant: 'DevQA'
+    state: query
+
+# 'APP1618_APP_10.173.224.0_28-BD':
+  - name: 'APP1618_APP_10.173.224.0_28-BD'
+    bd_type: ethernet
+    enable_routing: yes
+    enable_multicast: no
+    tenant: 'DevQA'
+    vrf: 'DQA'
+    state: query
+
+# 'APP1618_APP_10.173.224.0_28-BD_SUBNET':
+  - name: 'APP1618_APP_10.173.224.0_28-BD_SUBNET'
+    tenant: 'DevQA'
+    ap: 'APP1618_LS_10.173.224.0-AP'
+    bd: 'APP1618_APP_10.173.224.0_28-BD'
+    subnet_name: 'APP1618_APP_10.173.224.0_28-BD_SUBNET'
+    gateway: '10.173.224.1'
+    mask: 28
+    state: query
+
+# 'APP1618_APP_10.173.224.0_28-EPG':
+  - name: 'APP1618_APP_10.173.224.0_28-EPG'
+    tenant: 'DevQA'
+    ap: 'APP1618_LS_10.173.224.0-AP'
+    bd: 'APP1618_APP_10.173.224.0_28-BD'
+    state: query
+
+
+# 'PRES1618_PRES_10.173.224.16_28-BD':
+  - name: 'PRES1618_PRES_10.173.224.16_28-BD'
+    bd_type: ethernet
+    enable_routing: yes
+    enable_multicast: no
+    tenant: 'DevQA'
+    vrf: 'DQA'
+    state: query
+
+# 'PRES1618_PRES_10.173.224.16_28-BD_SUBNET':
+  - name: 'PRES1618_PRES_10.173.224.16_28-BD_SUBNET'
+    tenant: 'DevQA'
+    ap: 'PRES1618_LS_10.173.224.16-AP'
+    bd: 'PRES1618_PRES_10.173.224.16_28-BD'
+    subnet_name: 'PRES1618_PRES_10.173.224.16_28-BD_SUBNET'
+    gateway: '10.173.224.17'
+    mask: 28
+    state: query
+
+# 'PRES1618_PRES_10.173.224.16_28-EPG':
+  - name: 'PRES1618_PRES_10.173.224.16_28-EPG'
+    tenant: 'DevQA'
+    ap: 'PRES1618_LS_10.173.224.16-AP'
+    bd: 'PRES1618_PRES_10.173.224.16_28-BD'
+    state: query
+
+
+# 'DB1618_DB_10.173.224.32_28-BD':
+  - name: 'DB1618_DB_10.173.224.32_28-BD'
+    bd_type: ethernet
+    enable_routing: yes
+    enable_multicast: no
+    tenant: 'DevQA'
+    vrf: 'DQA'
+    state: query
+
+# 'DB1618_DB_10.173.224.32_28-BD_SUBNET':
+  - name: 'DB1618_DB_10.173.224.32_28-BD_SUBNET'
+    tenant: 'DevQA'
+    ap: 'DB1618_LS_10.173.224.32-AP'
+    bd: 'DB1618_DB_10.173.224.32_28-BD'
+    subnet_name: 'DB1618_DB_10.173.224.32_28-BD_SUBNET'
+    gateway: '10.173.224.33'
+    mask: 28
+    state: query
+
+# 'DB1618_DB_10.173.224.32_28-EPG':
+  - name: 'DB1618_DB_10.173.224.32_28-EPG'
+    tenant: 'DevQA'
+    ap: 'DB1618_LS_10.173.224.32-AP'
+    bd: 'DB1618_DB_10.173.224.32_28-BD'
+    state: query
+
