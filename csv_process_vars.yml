@@ -12,38 +12,38 @@
     csvfile: "{{ lookup('file', 'input/build_vars.csv') }}"
     
   tasks:
-#  - name: Read CSV
-#    read_csv:
-#      path: input/build_vars.csv
-#    register: csvfile_ap
-#    delegate_to: localhost
+  - name: Read CSV
+    read_csv:
+      path: input/build_vars.csv
+    register: csvfile_ap
+    delegate_to: localhost
 
   - name: new variable with current date time
     set_fact: time_stamp="{{lookup('pipe','date \"+%m-%d-%Y_%H%M\"')}}"
     
-#  - name: Generate Raw AP YAML build Vars
-#    template:
-#      src: template/csv_ap_to_yaml.j2
-#      dest: output/ACI-Info-AP.yml
+  - name: Generate Raw AP YAML build Vars
+    template:
+      src: template/csv_ap_to_yaml.j2
+      dest: output/ACI-Info-AP.yml
 
   - name: Generate Raw YAML build Vars
     template:
       src: template/csv_bd_epg_to_yaml.j2
       dest: output/ACI-Info-Build-{{ reference }}.yml
 
-#  - name: Insert/Update configuration using a local file and validate it
-#    blockinfile:
-#      block: "{{ lookup('file', 'output/ACI-Info-AP.yml') }}"
-#      dest: output/ACI-Info-Build-{{ reference }}.yml
-#      insertafter: "New Device Vars:"
-#
-#  - name: Clean Block Marker
-#    lineinfile:
-#      path: output/ACI-Info-Build-{{ reference }}.yml
-#      state: absent
-#      regexp: '^# (\w+)\s+ANSIBLE MANAGED BLOCK'
-#
-#  - name: Cleanup AP File
-#    file:
-#      path: output/ACI-Info-AP.yml
-#      state: absent
+  - name: Insert/Update configuration using a local file and validate it
+    blockinfile:
+      block: "{{ lookup('file', 'output/ACI-Info-AP.yml') }}"
+      dest: output/ACI-Info-Build-{{ reference }}.yml
+      insertafter: "New Device Vars:"
+
+  - name: Clean Block Marker
+    lineinfile:
+      path: output/ACI-Info-Build-{{ reference }}.yml
+      state: absent
+      regexp: '^ (\w+)\s+ANSIBLE MANAGED BLOCK'
+
+  - name: Cleanup AP File
+    file:
+      path: output/ACI-Info-AP.yml
+      state: absent
